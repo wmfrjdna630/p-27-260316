@@ -38,7 +38,7 @@ export default function RootLayout({
         </header>
         <main className="flex-grow flex justify-center items-center">
           {children}
-          </main>
+        </main>
         <footer>푸터</footer>
       </body>
     </html>
