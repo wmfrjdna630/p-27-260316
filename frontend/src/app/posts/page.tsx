@@ -1,20 +1,22 @@
 "use client"
 
+import { fetchApi } from "@/lib/client";
 import { PostDto } from "@/type/post";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export default function Home() {
+export default function List() {
 
     const [posts, setPosts] = useState<PostDto[]>([]);
 
     useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/posts`)
-            .then(response => response.json())
+
+        fetchApi(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/posts`)
             .then(data => {
                 console.log(data)
                 setPosts(data);
             });
+
     }, []);
 
 

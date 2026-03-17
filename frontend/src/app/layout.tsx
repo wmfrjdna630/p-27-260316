@@ -36,7 +36,7 @@ export default function RootLayout({
             <Link href="/posts">목록</Link>
           </nav>
         </header>
-        <main className="flex-grow flex justify-center items-center">
+        <main className="flex-grow flex flex-col justify-center gap-4 items-center">
           {children}
         </main>
         <footer>푸터</footer>
