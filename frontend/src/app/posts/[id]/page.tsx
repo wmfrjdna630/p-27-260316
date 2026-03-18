@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { PostDto } from "@/type/post";
 import { fetchApi } from "@/lib/client";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Detail() {
 
@@ -17,16 +18,19 @@ export default function Detail() {
         fetchApi(`/api/v1/posts/${id}`)
             .then(data => setPost(data));
 
+
     }, []);
 
     const onDeleteHandler = (id: number) => {
-        fetchApi(`/api/v1/posts/${id}`,{
+
+        fetchApi(`/api/v1/posts/${id}`, {
             method: "DELETE"
         })
-        .then((rs) => {
-            alert("삭제가 완료되었습니다.");
-            router.replace("/posts");
-        })
+            .then((rs) => {
+                alert("삭제가 완료되었습니다.");
+                router.replace("/posts");
+            })
+
     }
 
     return (
@@ -39,12 +43,16 @@ export default function Detail() {
                         <h1>{post.title}</h1>
                         <div>{post.content}</div>
                     </div>
-                    <div>
-                        <button 
-                        onClick={() => {
-                            onDeleteHandler(post.id);
-                        }}
-                        className="border-1 rounded p-2 bg-red-500">삭제</button>
+                    <div className="flex gap-4">
+                        <Link
+                            href={`/posts/${post.id}/edit`}
+                            className="border-1 rounded p-2 bg-blue-500">
+                            수정</Link>
+                        <button
+                            onClick={() => {
+                                onDeleteHandler(post.id);
+                            }}
+                            className="border-1 rounded p-2 bg-red-500">삭제</button>
                     </div>
                 </div>
             }
